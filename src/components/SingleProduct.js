@@ -1,13 +1,13 @@
 import React from "react";
-import { useGlobelContext } from "../FunctionAlContext";
+import { UseGlobelContext } from "../FunctionAlContext";
 import { Link, useParams } from "react-router-dom";
 const SingleProduct = () => {
   const { id } = useParams();
-  const { getSingleProduct, openModel, addToCart } = useGlobelContext();
+  const { getSingleProduct, openModal, addToCart } = UseGlobelContext();
   const Product = getSingleProduct(id);
 
   const { company, img, info, price, title, inCart } = Product;
-  console.log(inCart);
+
   return (
     <div className="single-product">
       <h1 className="title">{title}</h1>
@@ -21,7 +21,12 @@ const SingleProduct = () => {
       </div>
       <div className="links">
         <Link to="/">back to product</Link>
-        <button onClick={() => addToCart(id)}>
+        <button
+          onClick={() => {
+            addToCart(id);
+            openModal(id);
+          }}
+        >
           {inCart ? "in Cart" : "add To cart"}
         </button>
       </div>

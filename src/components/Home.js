@@ -1,18 +1,18 @@
-import React, { useState } from "react";
-import { useGlobelContext } from "../FunctionAlContext";
+import React from "react";
+import { UseGlobelContext } from "../FunctionAlContext";
 import { Link } from "react-router-dom";
 import { AiOutlineShoppingCart } from "react-icons/all";
 import PropTypes from "prop-types";
 
 const Home = () => {
-  const { products, addToCart } = useGlobelContext();
+  const { products, addToCart, openModal } = UseGlobelContext();
 
   return (
     <div className="home">
       <h1>Our Products</h1>
 
       <div className="row">
-        {products.map((product, index) => {
+        {products.map((product) => {
           const { id, img, title, price, inCart } = product;
 
           return (
@@ -22,7 +22,12 @@ const Home = () => {
                   <img src={img} />
                 </Link>
 
-                <button onClick={() => addToCart(id)}>
+                <button
+                  onClick={() => {
+                    openModal(id);
+                    addToCart(id);
+                  }}
+                >
                   {inCart ? (
                     <p className="incart">in cart</p>
                   ) : (
